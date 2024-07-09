@@ -41,8 +41,20 @@ function playRound(humanChoice, computerChoice) {
   console.log(`Human score: ${humanScore}`);
   console.log(`Computer score: ${computerScore}`);
 }
+function playGame() {
+  let winnerMessage;
+  for (let i = 0; i <= 5; i++) {
+    playRound(getHumanChoice(), getComputerChoice());
+  }
+  if (humanScore === computerScore) {
+    winnerMessage = "There was a tie in whole game";
+  } else if (humanScore > computerScore) {
+    winnerMessage = "You won the game!";
+  } else {
+    winnerMessage = "Computer won the game!";
+  }
+  console.log(winnerMessage);
+}
 let computerScore = 0;
 let humanScore = 0;
-while (true) {
-  playRound(getHumanChoice(), getComputerChoice());
-}
+playGame();
