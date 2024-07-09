@@ -43,7 +43,7 @@ function playRound(humanChoice, computerChoice) {
 }
 function playGame() {
   let winnerMessage;
-  for (let i = 0; i <= 5; i++) {
+  for (let i = 0; i <= 4; i++) {
     playRound(getHumanChoice(), getComputerChoice());
   }
   if (humanScore === computerScore) {
