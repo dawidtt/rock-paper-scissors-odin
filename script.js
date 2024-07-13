@@ -31,30 +31,25 @@ function playRound(humanChoice, computerChoice) {
     (humanChoice === "Scissors" && computerChoice === "Paper")
   ) {
     result = `You win! ${humanChoice} beats ${computerChoice}`;
-    humanScore++;
   } else {
     result = `You lose! ${computerChoice} beats ${humanChoice}`;
-    computerScore++;
   }
-  console.clear();
-  console.log(result);
-  console.log(`Human score: ${humanScore}`);
-  console.log(`Computer score: ${computerScore}`);
+
+  return result;
 }
-function playGame() {
-  let winnerMessage;
-  for (let i = 0; i <= 4; i++) {
-    playRound(getHumanChoice(), getComputerChoice());
-  }
-  if (humanScore === computerScore) {
-    winnerMessage = "There was a tie in whole game";
-  } else if (humanScore > computerScore) {
-    winnerMessage = "You won the game!";
-  } else {
-    winnerMessage = "Computer won the game!";
-  }
-  console.log(winnerMessage);
+
+function displayResults(result) {
+  const results = document.querySelector("#results");
+  const resultP = document.createElement("p");
+  resultP.id = "results";
+  resultP.textContent = result;
+  document.body.appendChild(resultP);
 }
-let computerScore = 0;
-let humanScore = 0;
-playGame();
+
+const buttons = document.querySelectorAll("button");
+for (const button of buttons) {
+  button.addEventListener("click", () => {
+    const result = playRound(button.textContent, getComputerChoice());
+    displayResults(result);
+  });
+}
