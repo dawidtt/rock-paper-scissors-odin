@@ -31,8 +31,10 @@ function playRound(humanChoice, computerChoice) {
     (humanChoice === "Scissors" && computerChoice === "Paper")
   ) {
     result = `You win! ${humanChoice} beats ${computerChoice}`;
+    humanScore++;
   } else {
     result = `You lose! ${computerChoice} beats ${humanChoice}`;
+    computerScore++;
   }
 
   return result;
@@ -41,11 +43,26 @@ function playRound(humanChoice, computerChoice) {
 function displayResults(result) {
   const results = document.querySelector("#results");
   const resultP = document.createElement("p");
-  resultP.id = "results";
   resultP.textContent = result;
-  document.body.appendChild(resultP);
+  results.appendChild(resultP);
+
+  const score = document.createElement("p");
+  score.textContent = `Human score: ${humanScore}, Computer score: ${computerScore}`;
+  results.appendChild(score);
+
+  if (humanScore >= 5) {
+    const winner = document.createElement("h1");
+    winner.textContent = "You won the game!";
+    results.appendChild(winner);
+  } else if (computerScore >= 5) {
+    const winner = document.createElement("h1");
+    winner.textContent = "Computer won the game.";
+    results.appendChild(winner);
+  }
 }
 
+let computerScore = 0;
+let humanScore = 0;
 const buttons = document.querySelectorAll("button");
 for (const button of buttons) {
   button.addEventListener("click", () => {
